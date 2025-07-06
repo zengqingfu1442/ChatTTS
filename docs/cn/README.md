@@ -25,7 +25,8 @@
 > 这个仓库包含算法架构和一些简单的示例。
 
 > [!Tip]
-> 由本仓库衍生出的用户端产品，请参见由社区维护的索引仓库  [Awesome-ChatTTS](https://github.com/libukai/Awesome-ChatTTS)。
+> 由本仓库衍生出的用户端产品，请参见由社区维护的索引仓库  [Awesome-ChatTTS](https://github.com/libukai/Awesome-ChatTTS)。  
+> 您可以在[这里](https://github.com/CodeBoarding/GeneratedOnBoardings/blob/main/ChatTTS/on_boarding.md)查看代码库的图解。
 
 ChatTTS 是一款专门为对话场景（例如 LLM 助手）设计的文本转语音模型。
 

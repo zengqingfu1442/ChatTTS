@@ -17,6 +17,11 @@ Un modelo de generación de voz para la conversación diaria.
 > [!NOTE]
 > Atención, es posible que esta versión no sea la última. Por favor, consulte la versión en inglés para conocer todo el contenido.
 
+> [!Tip]
+> Para los productos finales ampliados, consulta el repositorio índice [Awesome-ChatTTS](https://github.com/libukai/Awesome-ChatTTS/tree/en) mantenido por la comunidad.  
+> Puedes encontrar una visualización en forma de diagrama del código [aquí](https://github.com/CodeBoarding/GeneratedOnBoardings/blob/main/ChatTTS/on_boarding.md).
+
+
 ## Introducción
 
 ChatTTS es un modelo de texto a voz diseñado específicamente para escenarios conversacionales como LLM assistant.

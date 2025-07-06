@@ -21,7 +21,8 @@ Un modèle de parole génératif pour le dialogue quotidien.
 > Ce dépôt contient l'infrastructure de l'algorithme et quelques exemples simples.
 
 > [!Tip]
-> Pour les produits finaux étendus pour les utilisateurs, veuillez consulter le dépôt index [Awesome-ChatTTS](https://github.com/libukai/Awesome-ChatTTS/tree/en) maintenu par la communauté.
+> Pour les produits finaux étendus pour les utilisateurs, veuillez consulter le dépôt index [Awesome-ChatTTS](https://github.com/libukai/Awesome-ChatTTS/tree/en) maintenu par la communauté.  
+> Vous pouvez consulter un diagramme du code [ici](https://github.com/CodeBoarding/GeneratedOnBoardings/blob/main/ChatTTS/on_boarding.md).
 
 ChatTTS est un modèle de synthèse vocale conçu spécifiquement pour les scénarios de dialogue tels que les assistants LLM.
 

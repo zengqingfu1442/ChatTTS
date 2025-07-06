@@ -21,7 +21,8 @@ A generative speech model for daily dialogue.
 > This repo contains the algorithm infrastructure and some simple examples.
 
 > [!Tip]
-> For the extended end-user products, please refer to the index repo [Awesome-ChatTTS](https://github.com/libukai/Awesome-ChatTTS/tree/en) maintained by the community.
+> For the extended end-user products, please refer to the index repo [Awesome-ChatTTS](https://github.com/libukai/Awesome-ChatTTS/tree/en) maintained by the community.  
+> You can find a diagram visualization of the codebase [here](https://github.com/CodeBoarding/GeneratedOnBoardings/blob/main/ChatTTS/on_boarding.md).
 
 ChatTTS is a text-to-speech model designed specifically for dialogue scenarios such as LLM assistant.
 

@@ -25,7 +25,8 @@
 > 이 저장소에는 알고리즘 구조와 간단한 예시들이 포함되어 있습니다.
 
 > [!Tip]
-> 이 프로젝트에서 파생된 프로젝트는 커뮤니티가 유지 관리하는 커뮤니티[Awesome-ChatTTS](https://github.com/libukai/Awesome-ChatTTS)를 참조하시길 바랍니다.
+> 이 프로젝트에서 파생된 프로젝트는 커뮤니티가 유지 관리하는 커뮤니티[Awesome-ChatTTS](https://github.com/libukai/Awesome-ChatTTS)를 참조하시길 바랍니다.  
+> 코드베이스의 다이어그램 시각화는 [여기](https://github.com/CodeBoarding/GeneratedOnBoardings/blob/main/ChatTTS/on_boarding.md)에서 확인할 수 있습니다.
 
 ChatTTS는 대화 기반 작업(예: LLM 어시스턴트)을 위해 설계된 텍스트-음성 변환(TTS) 모델입니다.
 

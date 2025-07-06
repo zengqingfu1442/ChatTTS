@@ -10,6 +10,15 @@ ChatTTSは、LLMアシスタントなどの対話シナリオ用に特別に設�
 
 モデルやロードマップについての正式なお問い合わせは、**open-source@2noise.com**までご連絡ください。QQグループ：808364215に参加してディスカッションすることもできます。GitHubでの問題提起も歓迎します。
 
+## はじめに
+> [!Note]
+> このリポジトリにはアルゴリズムのインフラといくつかの簡単な例が含まれています。
+
+> [!Tip]
+> エンドユーザー向けに拡張された製品については、コミュニティによって管理されているインデックスリポジトリ [Awesome-ChatTTS](https://github.com/libukai/Awesome-ChatTTS/tree/en) を参照してください。  
+> コードベースの図解は[こちら](https://github.com/CodeBoarding/GeneratedOnBoardings/blob/main/ChatTTS/on_boarding.md)でご覧いただけます。
+
+
 ---
 ## ハイライト
 1. **会話型TTS**: ChatTTSは対話ベースのタスクに最適化されており、自然で表現豊かな音声合成を実現します。複数の話者をサポートし、対話型の会話を容易にします。
