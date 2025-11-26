@@ -279,7 +279,7 @@ def main():
         server_port=args.server_port,
         root_path=args.root_path,
         inbrowser=True,
-        footer_links=['api', 'gradio', 'settings'],
+        footer_links=["api", "gradio", "settings"],
     )
 
 

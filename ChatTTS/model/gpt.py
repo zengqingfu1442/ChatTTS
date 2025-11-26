@@ -231,9 +231,7 @@ class GPT(nn.Module):
                 and cache_length + input_ids.shape[1] > max_cache_length
             ):
                 start_pos = attention_mask.shape[1] - max_cache_length
-                attention_mask = attention_mask.narrow(
-                    1, start_pos, max_cache_length
-                )
+                attention_mask = attention_mask.narrow(1, start_pos, max_cache_length)
 
         if attention_mask is not None and position_ids is None:
             # create position_ids on the fly for batch generation
