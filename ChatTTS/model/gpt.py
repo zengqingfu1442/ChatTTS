@@ -162,7 +162,7 @@ class GPT(nn.Module):
     def _prepare_generation_inputs(
         self,
         input_ids: torch.Tensor,
-        past_key_values: Optional[Tuple[Tuple[torch.FloatTensor]]] = None,
+        past_key_values: Optional[Union[Tuple[Tuple[torch.FloatTensor]], Cache]] = None,
         attention_mask: Optional[torch.Tensor] = None,
         inputs_embeds: Optional[torch.Tensor] = None,
         cache_position: Optional[torch.Tensor] = None,
@@ -180,28 +180,30 @@ class GPT(nn.Module):
             has_static_cache = past_key_values is not None
 
         past_length = 0
+        max_cache_length = None
+        cache_length = 0
         if past_key_values is not None:
             if isinstance(past_key_values, Cache):
-                past_length = (
-                    int(cache_position[0])
-                    if cache_position is not None
-                    else past_key_values.get_seq_length()
-                )
-                try:
-                    max_cache_length = past_key_values.get_max_cache_shape()
-                except:
-                    max_cache_length = (
-                        past_key_values.get_max_length()
-                    )  # deprecated in transformers 4.48
-                cache_length = (
-                    past_length
-                    if max_cache_length is None
-                    else min(max_cache_length, past_length)
-                )
+                if past_key_values.layers and len(past_key_values.layers):
+                    past_length = (
+                        int(cache_position[0])
+                        if cache_position is not None
+                        else past_key_values.get_seq_length()
+                    )
+                    try:
+                        max_cache_length = past_key_values.get_max_cache_shape()
+                    except:
+                        max_cache_length = (
+                            past_key_values.get_max_length()
+                        )  # deprecated in transformers 4.48
+                    cache_length = (
+                        past_length
+                        if max_cache_length is None
+                        else min(max_cache_length, past_length)
+                    )
             # TODO joao: remove this `else` after `generate` prioritizes `Cache` objects
             else:
                 cache_length = past_length = past_key_values[0][0].shape[2]
-                max_cache_length = None
 
             # Keep only the unprocessed tokens:
             # 1 - If the length of the attention_mask exceeds the length of input_ids, then we are in a setting where
@@ -224,11 +226,13 @@ class GPT(nn.Module):
             # If we are about to go beyond the maximum cache length, we need to crop the input attention mask.
             if (
                 max_cache_length is not None
+                and max_cache_length > 0
                 and attention_mask is not None
                 and cache_length + input_ids.shape[1] > max_cache_length
             ):
+                start_pos = attention_mask.shape[1] - max_cache_length
                 attention_mask = attention_mask.narrow(
-                    1, -max_cache_length, max_cache_length
+                    1, start_pos, max_cache_length
                 )
 
         if attention_mask is not None and position_ids is None:

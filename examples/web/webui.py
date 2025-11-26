@@ -116,14 +116,14 @@ def main():
             spk_emb_text = gr.Textbox(
                 label="Speaker Embedding",
                 max_lines=3,
-                show_copy_button=True,
+                buttons=["copy"],
                 interactive=True,
                 scale=2,
             )
             dvae_coef_text = gr.Textbox(
                 label="DVAE Coefficient",
                 max_lines=3,
-                show_copy_button=True,
+                buttons=["copy"],
                 interactive=True,
                 scale=2,
             )
@@ -161,7 +161,7 @@ def main():
         text_output = gr.Textbox(
             label="Output Text",
             interactive=False,
-            show_copy_button=True,
+            buttons=["copy"],
         )
 
         sample_audio_input.change(
@@ -279,7 +279,7 @@ def main():
         server_port=args.server_port,
         root_path=args.root_path,
         inbrowser=True,
-        show_api=False,
+        footer_links=['api', 'gradio', 'settings'],
     )
 
 
