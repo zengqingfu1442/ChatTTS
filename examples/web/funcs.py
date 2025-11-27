@@ -62,7 +62,7 @@ def on_audio_seed_change(audio_seed_input):
     return rand_spk
 
 
-def load_chat(cust_path: Optional[str], coef: Optional[str], enable_cache = False) -> bool:
+def load_chat(cust_path: Optional[str], coef: Optional[str], enable_cache = True) -> bool:
     if cust_path == None:
         ret = chat.load(coef=coef, enable_cache=enable_cache)
     else:

@@ -28,7 +28,7 @@ class GPT(nn.Module):
         device=torch.device("cpu"),
         device_gpt=torch.device("cpu"),
         logger=logging.getLogger(__name__),
-        enable_cache=False,
+        enable_cache=True,
     ):
         super().__init__()
 

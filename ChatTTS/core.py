@@ -145,7 +145,7 @@ class Chat:
         use_flash_attn=False,
         use_vllm=False,
         experimental: bool = False,
-        enable_cache=False,
+        enable_cache=True,
     ) -> bool:
         download_path = self.download_models(source, force_redownload, custom_path)
         if download_path is None:
@@ -289,7 +289,7 @@ class Chat:
         use_flash_attn=False,
         use_vllm=False,
         experimental: bool = False,
-        enable_cache = False,
+        enable_cache = True,
     ):
         if device is None:
             device = select_device(experimental=experimental)
