@@ -141,10 +141,11 @@ class Chat:
         compile: bool = False,
         custom_path: Optional[FileLike] = None,
         device: Optional[torch.device] = None,
-        coef: Optional[torch.Tensor] = None,
+        coef: Optional[str] = None,
         use_flash_attn=False,
         use_vllm=False,
         experimental: bool = False,
+        enable_cache=False,
     ) -> bool:
         download_path = self.download_models(source, force_redownload, custom_path)
         if download_path is None:
@@ -156,6 +157,7 @@ class Chat:
             use_flash_attn=use_flash_attn,
             use_vllm=use_vllm,
             experimental=experimental,
+            enable_cache=enable_cache,
             **{
                 k: os.path.join(download_path, v)
                 for k, v in asdict(self.config.path).items()
@@ -287,6 +289,7 @@ class Chat:
         use_flash_attn=False,
         use_vllm=False,
         experimental: bool = False,
+        enable_cache = False,
     ):
         if device is None:
             device = select_device(experimental=experimental)
@@ -351,6 +354,7 @@ class Chat:
             device=device,
             device_gpt=self.device_gpt,
             logger=self.logger,
+            enable_cache=enable_cache,
         ).eval()
         assert gpt_ckpt_path, "gpt_ckpt_path should not be None"
         gpt.load_pretrained(gpt_ckpt_path, embed_path, experimental=experimental)
@@ -425,6 +429,7 @@ class Chat:
             text_tokens = refined.ids
             text_tokens = [i[i.less(self.tokenizer.break_0_ids)] for i in text_tokens]
             text = self.tokenizer.decode(text_tokens)
+            self.logger.debug("refined texts %s", str(text))
             refined.destroy()
             if refine_text_only:
                 if split_text and isinstance(text, list):

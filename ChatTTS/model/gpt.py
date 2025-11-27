@@ -28,6 +28,7 @@ class GPT(nn.Module):
         device=torch.device("cpu"),
         device_gpt=torch.device("cpu"),
         logger=logging.getLogger(__name__),
+        enable_cache=False,
     ):
         super().__init__()
 
@@ -35,6 +36,8 @@ class GPT(nn.Module):
 
         self.device = device
         self.device_gpt = device_gpt
+
+        self.enable_cache = enable_cache
 
         self.generator = torch.Generator(device=device)
 
@@ -142,7 +145,6 @@ class GPT(nn.Module):
     class _GenerationInputs:
         position_ids: torch.Tensor
         cache_position: torch.Tensor
-        use_cache: bool
         input_ids: Optional[torch.Tensor] = None
         past_key_values: Optional[Tuple[Tuple[torch.FloatTensor]]] = None
         attention_mask: Optional[torch.Tensor] = None
@@ -167,7 +169,6 @@ class GPT(nn.Module):
         inputs_embeds: Optional[torch.Tensor] = None,
         cache_position: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.Tensor] = None,
-        use_cache=True,
     ) -> _GenerationInputs:
         # With static cache, the `past_key_values` is None
         # TODO joao: standardize interface for the different Cache classes and remove of this if
@@ -230,8 +231,7 @@ class GPT(nn.Module):
                 and attention_mask is not None
                 and cache_length + input_ids.shape[1] > max_cache_length
             ):
-                start_pos = attention_mask.shape[1] - max_cache_length
-                attention_mask = attention_mask.narrow(1, start_pos, max_cache_length)
+                attention_mask = attention_mask.narrow(1, -max_cache_length, max_cache_length)
 
         if attention_mask is not None and position_ids is None:
             # create position_ids on the fly for batch generation
@@ -258,7 +258,6 @@ class GPT(nn.Module):
         model_inputs = self._GenerationInputs(
             position_ids=position_ids,
             cache_position=cache_position,
-            use_cache=use_cache,
         )
 
         # if `inputs_embeds` are passed, we only want to use them in the 1st generation step
@@ -399,7 +398,6 @@ class GPT(nn.Module):
                 inputs_ids,
                 past_key_values,
                 attention_mask_cache.narrow(1, 0, inputs_ids.shape[1]),
-                use_cache=not self.is_te_llama,
             )
 
             if i > 0:
@@ -423,7 +421,7 @@ class GPT(nn.Module):
                 position_ids=model_input.position_ids,
                 past_key_values=model_input.past_key_values,
                 inputs_embeds=model_input.inputs_embeds,
-                use_cache=model_input.use_cache,
+                use_cache=not self.is_te_llama and self.enable_cache,
                 output_attentions=return_attn,
                 cache_position=model_input.cache_position,
             )
